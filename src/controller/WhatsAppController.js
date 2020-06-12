@@ -25,7 +25,9 @@ class WhatsAppController {
     /* Cria um novo método para objetos sem precisar usar 
     uma biblioteca como jQuery para encurtar o código
     
-    O return this é para poder aninhar vários metodos um depois do outro*/
+    O return this é para poder aninhar vários metodos um depois do outro
+    
+    Element = pai de todos*/
     elementsPrototype(){
 
         Element.prototype.hide = function(){
@@ -77,6 +79,28 @@ class WhatsAppController {
             return this.classList.contains(name);
         }
 
+        /** Classe do formulario html
+        Carrega o FormData 
+        */ 
+        HTMLFormElement.prototype.getForm = function () {
+            return new FormData(this);
+        }
+
+        // Gera o mesmo formulario preenchido, mas no formato JSON
+        HTMLFormElement.prototype.toJSON = function() {
+            
+            let json = {};
+
+            this.getForm().forEach((value, key)=>{
+
+                json[key] = value;
+
+            });
+
+            return json;
+
+        }
+
     }
 
     initEvents(){//Inicializa os eventos
@@ -112,6 +136,45 @@ class WhatsAppController {
         this.el.btnClosePanelAddContact.on('click', e=>{
 
             this.el.panelAddContact.removeClass('open');
+
+        });
+
+        // Alterar foto
+        this.el.photoContainerEditProfile.on('click', e=>{
+
+            this.el.inputProfilePhoto.click();
+
+        });
+
+        // Nome contato
+        this.el.inputNamePanelEditProfile.on('keypress', e=>{
+
+            if (e.key === 'Enter') {
+
+                e.preventDefault();
+                this.el.btnSavePanelEditProfile.click();
+
+            }
+
+        });
+
+        this.el.btnSavePanelEditProfile.on('click', e=>{
+
+            console.log(this.el.inputNamePanelEditProfile.innerHTML);
+
+        });
+
+        /* FormData trata os campos do form e os recupera automaticamente com base no name.
+        Equivalente a selecionar o form com querySelector, que procura todos os campos do
+        formulario e faz um append em cada campo correspondente.
+        Com o id do formulario dentro do FormData, ele já faz isso.
+        Deixa o codigo mais enxuto e mais rapido
+        */
+        this.el.formPanelAddContact.on('submit', e=>{
+
+            e.preventDefault();
+
+            let formData = getForm(this.el.formPanelAddContact);
 
         });
 

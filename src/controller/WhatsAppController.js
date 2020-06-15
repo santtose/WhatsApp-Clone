@@ -304,13 +304,13 @@ class WhatsAppController {
 
     }
 
-    startRecordMicrophoneTime(){// Tempo durante gravação em milisegundos
+    startRecordMicrophoneTime(){// Timer de gravação
 
         let start = Date.now();
 
         this._recordMicrophoneInterval = setInterval(()=>{
 
-            this.el.recordMicrophoneTimer.innerHTML = (Date.now() - start);
+            this.el.recordMicrophoneTimer.innerHTML = Format.toTime(Date.now() - start);
 
         }, 100);
 
@@ -320,7 +320,7 @@ class WhatsAppController {
 
         this.el.recordMicrophone.hide();
         this.el.btnSendMicrophone.show();
-        // Interrompe o time pelo id correspondente
+        // Interrompe o timer de gravação pelo id correspondente
         clearInterval(this._recordMicrophoneInterval);
 
     }

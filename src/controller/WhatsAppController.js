@@ -22,12 +22,14 @@ class WhatsAppController {
 
     }
 
-    /* Cria um novo método para objetos sem precisar usar 
-    uma biblioteca como jQuery para encurtar o código
-    
-    O return this é para poder aninhar vários metodos um depois do outro
-    
-    Element = pai de todos*/
+    /**
+     * Cria um novo método para objetos sem precisar usar 
+       uma biblioteca como jQuery para encurtar o código
+        
+       O return this é para poder aninhar vários metodos um depois do outro
+        
+       Element = pai de todos
+     */
     elementsPrototype(){
 
         Element.prototype.hide = function(){
@@ -80,8 +82,8 @@ class WhatsAppController {
         }
 
         /** Classe do formulario html
-        Carrega o FormData 
-        */ 
+         * Carrega o FormData 
+         */ 
         HTMLFormElement.prototype.getForm = function () {
             return new FormData(this);
         }
@@ -198,10 +200,10 @@ class WhatsAppController {
             e.stopPropagation();
             this.el.menuAttach.addClass('open');
             /**
-             Bind para dizer que o this continuara a fazer parte do meu escopo,
+             * Bind para dizer que o this continuara a fazer parte do meu escopo,
              caso contrário, dara um erro, pois saira do el do construtor e o this
              sera do proprio document do dom
-            */ 
+             */
             document.addEventListener('click', this.closeMenuAttach.bind(this));
 
         });
@@ -299,6 +301,65 @@ class WhatsAppController {
         this.el.btnFinishMicrophone.on('click', e=>{
 
             this.closeRecordMicrophone();
+
+        });
+
+        /**
+         * Enviar mensagem ao pressionar Enter, além de clicar em enviar
+         */
+        this.el.inputText.on('keypress', e=>{
+
+            if (e.key === 'Enter' && !e.ctrlKey) {
+
+                e.preventDefault();
+                this.el.btnSend.click();
+
+            }
+
+        });
+
+        /**
+         * Ao escrever tira o placeholder, ao limpar, volta o placeholder.
+         * E ao escrever substitui o microfone pela seta de envio, ao limpar
+         * volta o microfone 
+         */
+        this.el.inputText.on('keyup', e=>{
+
+            if (this.el.inputText.innerHTML.length) {
+
+                this.el.inputPlaceholder.hide();
+                this.el.btnSendMicrophone.hide();
+                this.el.btnSend.show();
+
+            } else {
+
+                this.el.inputPlaceholder.show();
+                this.el.btnSendMicrophone.show();
+                this.el.btnSend.hide();
+
+            }
+
+        });
+
+        this.el.btnSend.on('click', e=>{
+
+            console.log(this.el.inputText.innerHTML);
+
+        });
+
+        this.el.btnEmojis.on('click', e=>{
+
+            this.el.panelEmojis.toggleClass('open');
+
+        });
+
+        this.el.panelEmojis.querySelectorAll('.emojik').forEach(emoji=>{
+
+            emoji.on('click', e=>{
+
+                console.log(emoji.dataset.unicode);
+
+            });
 
         });
 

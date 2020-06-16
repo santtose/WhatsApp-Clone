@@ -359,6 +359,27 @@ class WhatsAppController {
 
                 console.log(emoji.dataset.unicode);
 
+                /**
+                 * cloneNode, clona o elemento com suas propriedades.
+                 * 
+                 * Como o emoji é um elemento unicode, vai trazer o css, informaçoes
+                 * que estão dentro dele pra dentro do obj e inseri-lo aonde precisa 
+                 * no campo de mensagem
+                 */
+                let img = this.el.imgEmojiDefault.cloneNode();
+
+                img.style.cssText = emoji.style.cssText;
+                img.dataset.unicode = emoji.dataset.unicode;
+                img.alt = emoji.dataset.unicode;
+
+                emoji.classList.forEach(name=>{
+                    img.classList.add(name);
+                });
+
+                this.el.inputText.appendChild(img);
+
+                this.el.inputText.dispatchEvent(new Event('keyup'));
+
             });
 
         });

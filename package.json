@@ -1,0 +1,24 @@
+{
+  "name": "curso-javascript-projeto-whatsapp-clone",
+  "version": "1.0.0",
+  "description": "Projeto desenvolvido como exemplo do Curso Completo de JavaScript na Udemy.com.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santtose/WhatsApp-Clone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santtose/WhatsApp-Clone/issues"
+  },
+  "homepage": "https://github.com/santtose/WhatsApp-Clone#readme",
+  "dependencies": {
+    "save": "^2.4.0",
+    "webpack": "^3.1.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}

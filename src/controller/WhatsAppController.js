@@ -376,8 +376,31 @@ class WhatsAppController {
                     img.classList.add(name);
                 });
 
-                this.el.inputText.appendChild(img);
+                let cursor = window.getSelection();
 
+                if (!cursor.focusNode || !cursor.focusNode.id == 'input-text') {
+                    this.el.inputText.focus();
+                    cursor = window.getSelection();
+                }
+
+                // Intervalo de seleção(selecionar um texto)
+                let range = document.createRange();
+
+                // Remove os caracteres selecionados ao clicar no emoji
+                range = cursor.getRangeAt(0);
+                range.deleteContents();
+
+                // Interfere na sentança de caracteres 
+                let frag = document.createDocumentFragment();
+
+                frag.appendChild(img);
+
+                // Coloca o emoji no lugar do fragmento
+                range.insertNode(frag);
+
+                range.setStartAfter(img);
+
+                // Força o evento acontecer
                 this.el.inputText.dispatchEvent(new Event('keyup'));
 
             });

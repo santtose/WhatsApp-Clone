@@ -234,12 +234,14 @@ class WhatsAppController {
                 'height': 'calc(100% - 120px)'
             });
 
+            this._camera = new CameraController();
+
         });
 
         this.el.btnClosePanelCamera.on('click', e=>{
 
             this.closeAllMainPanel();
-            this.el.panelMessagesContainer.show();
+            this.el.panelMessagesContainer.show(this.el.videoCamera);
 
         });
 

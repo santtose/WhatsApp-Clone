@@ -1,12 +1,10 @@
-class CameraController {
+export class CameraController {
    
     constructor(videoEl){
 
         this._videoEl = videoEl;
 
-        navigator.mediaDevices.getUserMedia({
-            video: true
-        }).then(stream=>{
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream=>{
 
             /**
              * createObjectURL() cria arquivos do tipo binario

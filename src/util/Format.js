@@ -1,4 +1,4 @@
-class Format {
+export class Format {
 
     /* Esse metodo cria altomaticamento os atributos
     para cada Id dentro do html, tirando assim a necessidade

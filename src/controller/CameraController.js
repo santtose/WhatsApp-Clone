@@ -13,7 +13,7 @@ export class CameraController {
              * o video conseguir ler, ou seja, convertemos o stream em URL para
              * o video saber ler.     
              */
-            this._videoEl.src = URL.createObjectURL(stream);
+            this._videoEl.src = stream;
             this._videoEl.play();
 
         }).catch(err=>{

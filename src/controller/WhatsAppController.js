@@ -237,7 +237,7 @@ export class WhatsAppController {
                 'height': 'calc(100% - 120px)'
             });
 
-            this._camera = new CameraController();
+            this._camera = new CameraController(this.el.videoCamera);
 
         });
 

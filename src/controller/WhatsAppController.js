@@ -245,6 +245,7 @@ export class WhatsAppController {
 
             this.closeAllMainPanel();
             this.el.panelMessagesContainer.show(this.el.videoCamera);
+            this._camera.stop();
 
         });
 
